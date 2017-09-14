@@ -442,7 +442,18 @@ Printer.prototype.close = function(callback){
   return this.flush(function(){
     self.adapter.close(callback);
   });
-};
+}
+
+// because it always comes out errors on third time of writeout, so reconnect to the printer to reset the stack.
+// RangeError: Maximum call stack size exceeded
+// No idea what's actually happends, but temporarly solved it with this method first (or maybe the last)
+Printer.prototype.reconnect = function(callback){
+  var self = this;
+  return this.flush(function(){
+    self.adapter.reconnect(callback);
+  });
+}
+;
 
 /**
  * [exports description]

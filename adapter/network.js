@@ -59,4 +59,14 @@ Network.prototype.close = function(callback){
   return this;
 }
 
+// because it always comes out errors on third time of writeout, so reconnect to the printer to reset the stack.
+// RangeError: Maximum call stack size exceeded
+// No idea what's actually happends, but temporarly solved it with this method first (or maybe the last)
+Network.prototype.reconnect = function(callback){
+  this.close();
+  this.device = new net.Socket();
+  this.open();
+}
+
+
 module.exports = Network;
