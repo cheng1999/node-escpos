@@ -65,7 +65,6 @@ Network.prototype.close = function(callback){
 Network.prototype.reconnect = function(callback){
   this.close();
   this.device = new net.Socket();
-  this.open();
 }
 
 
